@@ -1,0 +1,51 @@
+<center><h1><%= @shelf.name %></h1></center>
+
+<center>
+	<%= link_to "Rename", edit_shelf_path(@shelf), class: "btn btn-primary", role: "button" %>
+	<%= link_to "Delete", @shelf, method: :delete, class: "btn btn-danger", role: "button" %>	
+</center>
+
+
+<% if @books.count == 0 %>
+	<br>
+	<div class="well">
+		<center><h2>You haven't any books here yet.</h2></center> 
+		<center><h2>Try to <%= link_to "add", new_shelf_book_path(@shelf) %> some!</h2></center>
+	</div>
+<% else %>
+	<center><h2>Random Book:</h2></center>	
+	<center>
+		<div class="well">
+			<h4><i><%= @rand_book.author %></i></h4>
+			<h3><%= @rand_book.title %></h3>	
+		</div>
+	</center>
+	<%= link_to "Add Book", new_shelf_book_path(@shelf), class: "btn btn-success", role: "button" %>	
+	<div class="well">
+		<table style="width:100%" class="table">
+			<thead>
+				<tr >
+					<th>#</th>
+					<th>Title</th>
+					<th colspan="1">Author</th>
+					<th></th>
+				</tr>
+			</thead>	
+	
+			<tbody>
+
+				<% n = 0 %>
+				<% @books.each do |book| %>
+					<tr class= <%="success" if book.readed %>>
+						<td><%= n += 1 %></td>
+						<td><%= book.title %></td>
+						<td><%= book.author %></td>
+						<td align="right"><%= link_to "Edit", edit_shelf_book_path(@shelf, book), class: "btn btn-primary", role: "button" %>  
+							<%= link_to "Delete", [@shelf, book], method: :delete, class: "btn btn-danger", role: "button" %></td>
+					</tr>
+				<% end %>	
+			</tbody>	
+		</table>
+	</div>
+<% end %>	
+		
