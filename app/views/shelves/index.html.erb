@@ -1,16 +1,56 @@
-<br><br>
-<div class="container">
-	<div class="jumbotron">
-    	<center><h1>BookShelves</h1></center>
-    	
-    		<h2>Choose your shelf:
-    			<% @shelves.each do |shelf| %>
-    				<%= link_to shelf.name, shelf, class: "btn btn-primary", role: "button" %>
-    			<% end %>	
-    		</h2>
-    		<h2>Or create new:
-    			<%= link_to "New Shelf", new_shelf_path, class: "btn btn-success", role: "button" %>	
-    		</h2>		
+<% if user_signed_in? %>
+    <% if @shelves.count > 0 %>
+        <h2><center>You have <%= @shelves.count %> Shelves:</center></h2>
+        <div class="row">
+        <% @shelves.each do |shelf| %>
+            <div class="col-md-3">
+                <%= link_to shelf, class: 'shelves_panel' do %>
+                    <div class="well">
+                        <center>
+                            <h1><i class="glyphicon glyphicon-book"></i></h1>
+                            <h3><%= shelf.name %></h3>
+                            <span class="badge"><%= pluralize(shelf.books.count, "book") %></span>
+                        </center>
+                    </div>
+                <% end %>
+            </div>    
+        <% end %>  
+            <div class="col-md-3">
+                <%= link_to new_shelf_path, class: 'shelves_panel' do %>
+                    <div class="well">
+                        <center>
+                            <h1><i class="glyphicon glyphicon-plus"></i></h1>
+                            <h3>Create New</h3>
+                            <br>
+                        </center>
+                    </div>
+                <% end %>
+            </div>     
+        </div>
+    <% else %>
+        <div class='well'>
+            <center><h2>You have not any shelves yet.</h2>
+                <%= link_to "Create new!", new_shelf_path, class: "btn btn-success", role: "button" %> 
+            </center>  
+        </div>     
+    <% end %>           
+
+<% end %>
+	
+    <div class="jumbotron" id='main' >
+    	<h1 id='name' >BookShelves</h1>
+    	<% if user_signed_in? %>
+            <p>Welcome back <%= current_user.username %>!</p>
+        <% else %>
+            <p>Welcome to the Bookshelves!</p>
+            <p>Login or Sign up to start using service.</p>
+            <p><%= link_to "Sign up", new_user_registration_path, class: "btn btn-success", role: "button" %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-primary", role: "button" %></p>
+        <% end %> 
+            <p>Do you like to read? Have you a big list of books that you would like to read, but you do not know where to start? Want to manage your list to don't forget anything?</p>
+            <p>Try our service. Using it you can create many lists of books (Bookshelf), where you can add books which you are interested. Every book you can mark it as "not readed", "readed" and "read now". And if you do not know which book to choose at this time to read, just click <%= content_tag(:a, 'Random Book', class: 'btn btn-warning btn-lg', role: "button") %>, and the system will automatically select for you one of your unread books. Enjoy.</p>
     		
 	</div>
-</div>
+    
+         
+

@@ -1,0 +1,30 @@
+<center><h2><b>Users List</b></h2></center>
+<div class="well">
+<table style="width:100%" class="table">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Shelves Count</th>
+        <th>Created</th>
+        <th>Sign in</th>
+        <th>Last sign in</th>
+        
+        <th></th>
+        
+    </tr>   
+    <% @users.each do |user| %>
+
+        <tr >
+            
+            <td><b><%= user.username %></b></td>
+            <td><%= user.email %></td>
+            <td><%= user.shelves.count %></td>
+            <td><%= user.created_at %></td>
+            <td><%= user.sign_in_count %></td>
+            <td><%= user.last_sign_in_at %></td>
+            
+            <td><%= link_to "Edit", edit_user_path(user) %></td>
+        </tr>       
+    <% end %>
+<table>
+<div>

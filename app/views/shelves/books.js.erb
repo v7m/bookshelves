@@ -1,0 +1,7 @@
+var bookLists = ['books', 'not_readed_books', 'readed_books', 'read_now_books']
+<% book_lists = [@books, @not_readed_books, @readed_books, @read_now_books] %>
+<% book_lists.each_with_index do |list, index| %>
+	if ( $('.nav_books.active').attr('id') === bookLists[<%= index %>] ){
+		$('#books_list').hide().html("<%= j render partial: 'books/books_list', :locals => { books: list } %>").fadeIn(400);
+	}
+<% end %>

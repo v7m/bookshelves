@@ -1,3 +1,25 @@
 // Place all the styles related to the shelves controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.random_book_panel .well {
+	 display: none; 
+}
+
+.table tbody>tr>td.vert-align {
+    vertical-align: middle;
+}
+
+
+.shelves_panel {
+    text-decoration: none;
+    color: #777;
+}
+
+.shelves_panel:hover {
+    text-decoration: none;
+}
+
+.shelves_panel .badge {
+    background-color: #777;
+}

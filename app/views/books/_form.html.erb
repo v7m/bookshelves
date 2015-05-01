@@ -1,26 +1,66 @@
-<%= form_for([@shelf, @book], html: {class: "form-horizontal"}) do |f| %>
     <div class="form-group">
-        <%= f.label :title, class: "col-sm-2 control-label" %>
-        <div class="col-sm-7"><%= f.text_field :title, class: "form-control" %></div>
-    </div>  
+        <div class="col-sm-offset-4 col-sm-4">
+            <%= error_messages_for(book) %>
+        </div>
+    </div> 
+
     <div class="form-group">
-        <%= f.label :author, class: "col-sm-2 control-label" %>
-        <div class="col-sm-7"><%= f.text_field :author, class: "form-control" %></div>
-    </div>   
+      <%= f.label :shelf_id, "Shelf", class: "col-sm-4 control-label" %>
+      <div class="col-sm-4"><%= f.select(:shelf_id, @shelves.map { |s| [s.name, s.id] }, {}, {class: "form-control"}) %></div>
+    </div> 
     
+    <% max_title = 70 %>
+    <div class="form-group">
+        <%= f.label :title, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.text_field :title, class: "form-control", placeholder: "max #{max_title} characters", maxlength: "#{max_title}" %>
+        </div>
+    </div>  
+
+    <% max_author = 70 %>
+    <div class="form-group">
+        <%= f.label :author, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.text_field :author, class: "form-control", placeholder: "max #{max_author} characters", maxlength: "#{max_author}" %>
+        </div>
+    </div>   
+
+    <% max_description = 150 %>
+    <div class="form-group">
+        <%= f.label :description, class: "col-sm-4 control-label" %>
+        <div class="col-sm-4">
+          <%= f.text_area :description, class: "form-control", rows: "3", placeholder: "max #{max_description} characters", maxlength: "#{max_description}" %>
+        </div>
+    </div>  
+        
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <%= f.label :readed, class: "checkbox" do %>
-          <%= f.check_box :readed %> Readed
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="radio">
+        <%= f.label :status, class: "radio_button", for: 'book_status_not_readed' do %>
+          <%= f.radio_button :status, :not_readed %> Not readed
         <% end %>
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="radio">
+        <%= f.label :status, class: "radio_button", for: 'book_status_read_now' do %>
+          <%= f.radio_button :status, :read_now %> Read now
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="radio">
+        <%= f.label :status, class: "radio_button", for: 'book_status_readed' do %>
+          <%= f.radio_button :status, :readed %> Readed
+        <% end %>
+      </div>
+    </div>
+  </div>
+ 
 
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-7">
-            <%= f.submit "Add Book", class: "btn btn-primary" %>
-    </div> 
 
-<% end %>   
+       
