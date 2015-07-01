@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'heroku'
-gem 'validates_email_format_of'
 gem 'pg'
 gem 'jquery-turbolinks'
 

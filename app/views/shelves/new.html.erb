@@ -1,2 +1,8 @@
 <center><h2>New Shelf</center></h2>
-<%= render 'form' %>
+<%= form_for(@shelf, html: {class: "form-horizontal"}) do |f| %>
+	<%= render partial: 'form', locals: {f: f, shelf: @shelf} %>
+	<div class="form-group">
+	    <div class="col-sm-offset-4 col-sm-4">
+	        <%= f.submit "Create Shelf", class: "btn btn-primary" %>
+	</div>
+<% end %>	
